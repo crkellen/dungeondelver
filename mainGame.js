@@ -6,28 +6,6 @@
  * Dungeon Delver Rodney Main Program Code
  */
 
- /* TODO:
---Enemies moving
-Stat bars
-Fighting
-Turn based or real time? (Or maybe implement both? In real time moving/actions could have 0.2 second delay so you can't move-hit-move in a very short time frame)
-HP potions should heal
-Coins? (A sprite already exists)
-Chests? (Need to draw a sprite for a closed chest, open one exists)
-Keys? (For either a chest, or the stairs down. In the first case we could spawn a random amount of keys, in the latter one key per floor)
-Bosses?
-Different mobs? (If chests are added as well, Mimics could be a thing)
-*/
-
-/* TODO NEXT:
-Add stat bars
-*/
-
-/* TODO BUGS:
-If you move to the next floor without killing all of the enemies, the enemies that are alive persist and you can end up with dozens of enemies in one floor.
-Check out what happens if you remove all the "cMap[119] = 1;" lines? Does it break the map generation? (Bottom right corner of top line.)
-*/
-
 /* TILE NUMBERS
 0 = empty
 1 = wall
@@ -61,10 +39,11 @@ PLAYER_IMG_SRC  	= 'playerImg.png';
 WALL_IMG_SRC 		= 'wall2Img.png';
 ENEMY_IMG_SRC 	 	= 'enemyImg.png';
 POTION_IMG_SRC 	 	= 'healthPotionImg.png';
-GOLD_IMG_SRC 		= 'goldImg.png'; 		//exists because of Marko
-PRIZE_IMG_SRC 	 	= 'prizeImg.png';  		//exists because of Marko
+GOLD_IMG_SRC 		= 'goldImg.png'; 		//currently unused
+PRIZE_IMG_SRC 	 	= 'prizeImg.png';  		//currently unused
 //UPSTAIRS_IMG_SRC 	= 'upStairsImg.png';
 DOWNSTAIRS_IMG_SRC 	= 'downStairsImg.png';
+HEALTHBAR_IMG_SRC	= 'statHealth.png';
 
 
 /*
@@ -93,6 +72,7 @@ var Player = {
 	img:	PLAYER_IMG_SRC,
 	pos:	0,
 	health:	100,
+	maxHealth: 100,
 	
 	//Player movement
 	movePlayer: function(dir) {
@@ -296,6 +276,7 @@ var theGame = {
 	prizeImgLoaded: 		0,
 	//upstairsImgLoaded: 	0,
 	downstairsImgLoaded: 	0,
+	healthbarImgLoaded:		0,
 	//playerInstance:		new Player("player", PLAYER_IMG_SRC, 0, 1, 100);
 	score:  				0,
 	
@@ -338,6 +319,10 @@ var theGame = {
 		this.downstairsImg = new Image();
 		this.downstairsImg.onload = function () { 	theGame.downstairsImgLoaded = 1; };
         this.downstairsImg.src = DOWNSTAIRS_IMG_SRC;
+		//Healthbar
+		this.healthbarImg = new Image();
+		this.healthbarImg.onload = function () {	theGame.healthbarImgLoaded = 1; };
+		this.healthbarImg.src = HEALTHBAR_IMG_SRC;
 		
 		theGame.GenerateMap();
 		theGame.GenerateActors();
@@ -3413,7 +3398,7 @@ var theGame = {
 	
 	DrawScreen : function(ctx) {
 		//Clear the Screen
-		ctx.fillStyle = "#303030"; // The background colour
+		ctx.fillStyle = "#303030"; //The background colour
         ctx.fillRect(0, 0, this.gameWidth, this.gameHeight);
 		//Print the map[]
 		for( var i = 0; i < 120; i++ ) { //Draws the 1st row of rooms
@@ -3723,11 +3708,46 @@ var theGame = {
 		}
 		theGame.onesPlace = 0;
 		/*
-		//Just for testing how the drawing works, not finished with this yet but it's commented so the game looks normal. -Dorover
+		//Just for testing how the drawing works, it's commented so the game looks normal. -Dorover
 		theGame.CalculateCoords(480-360, 3);
-		ctx.drawImage(this.prizeImg, 0, 0, this.prizeImg.width, this.prizeImg.height, this.imgX, this.imgY, this.prizeImg.width, this.prizeImg.height);
+		ctx.drawImage(this.prizeImg, 0, 0, this.prizeImg.width, this.prizeImg.height, 30, 600, this.prizeImg.width, this.prizeImg.height);
 		theGame.onesPlace = 0;
 		*/
+		//Draw the stats (health, score)
+		if(this.healthbarImgLoaded != 0) {
+			ctx.drawImage(this.healthbarImg, 0, 0, this.healthbarImg.width, this.healthbarImg.height, 20, 570, this.healthbarImg.width, this.healthbarImg.height);
+		}
+		//Health
+		ctx.beginPath();
+		ctx.rect(98, 582, (133 * (Player.health/Player.maxHealth)), 21);
+		ctx.fillStyle = "Green";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.rect(97, 581, 135, 23);
+		ctx.stroke();
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "Green";
+		ctx.textAlign = "left";
+		ctx.fillText("Health", 30, 600);
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "White";
+		ctx.textAlign = "left";
+		ctx.fillText(Player.health, 125, 600);
+		ctx.fillText("/", 165, 600)
+		ctx.fillText(Player.maxHealth, 175, 600);
+		//Score
+		if(this.healthbarImgLoaded != 0) {
+			ctx.drawImage(this.healthbarImg, 0, 0, this.healthbarImg.width, this.healthbarImg.height, 713, 570, this.healthbarImg.width, this.healthbarImg.height);
+		}
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "Yellow";
+		ctx.textAlign = "left";
+		ctx.fillText("Score", 723, 600);
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "White";
+		ctx.textAlign = "left";
+		ctx.fillText(this.score, 818, 600);
+
 	},
 
 	ProcessInput : function(event) {

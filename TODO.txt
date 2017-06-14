@@ -1,0 +1,18 @@
+TODO list:
+--Enemies moving
+--Stat bars
+Enemy fighting
+Turn based or real time? (Or maybe implement both? In real time moving/actions could have 0.1 second delay so you can't move-hit-move in a very short time frame)
+HP potions should heal
+Coins? (Money for some sort of purchases or just score?) (A sprite already exists)
+Chests? (Need to draw a sprite for a closed chest, open one exists)
+Keys? (For either a chest, or the stairs down. In the first case we could spawn a random amount of keys (like 0 = 50%, 1 = 45%, 2 = 5%), in the latter one key per floor)
+Bosses?
+Different mobs? (If chests are added as well, Mimics could be cool)
+-----
+Next up:
+Give the enemies some sort of an attack (can this be done with an animation cell/image? For example when an enemy attacks, change its image to another one for 0.3 seconds)
+-----
+
+Bugs:
+Check out what happens if you remove all the "cMap[119] = 1;" lines? Does it break the map generation? (Tile 119 is bottom right corner of top room-line.)
