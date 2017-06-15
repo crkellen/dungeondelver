@@ -106,26 +106,20 @@ var Player = {
 			switch( cMap[this.pos - 1] ) {
 				case 0:
 					return false;
-					break;
 				case 1:
 					return true;
-					break;
 				case 3:
 					//ATTACK
 					theGame.KillEnemy(this.pos - 1);
 					return true;
-					break;
 				case 4:
 					//GET GOLD
 					return false;
-					break;
 				case 5:
 					//HEAL
 					return false;
-					break;
 				case 7:
 					return true;
-					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
 					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
@@ -134,33 +128,26 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "right" ) {
 			switch( cMap[this.pos + 1] ) {
 				case 0:
 					return false;
-					break;
 				case 1:
 					return true;
-					break;
 				case 3:
 					//ATTACK
 					theGame.KillEnemy(this.pos + 1);
 					return true;
-					break;
 				case 4:
 					//GET GOLD
 					return false;
-					break;
 				case 5:
 					//HEAL
 					return false;
-					break;
 				case 7:
 					return true;
-					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
 					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
@@ -169,33 +156,26 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "up" ) {
 			switch( cMap[this.pos - 30] ) {
 				case 0:
 					return false;
-					break;
 				case 1:
 					return true;
-					break;
 				case 3:
 					//ATTACK
 					theGame.KillEnemy(this.pos - 30);
 					return true;
-					break;
 				case 4:
 					//GET GOLD
 					return false;
-					break;
 				case 5:
 					//HEAL
 					return false;
-					break;
 				case 7:
 					return true;
-					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
 					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
@@ -204,33 +184,26 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "down" ) {			
 			switch( cMap[this.pos + 30] ) {
 				case 0:
 					return false;
-					break;
 				case 1:
 					return true;
-					break;
 				case 3:
 					//ATTACK
 					theGame.KillEnemy(this.pos + 30);
 					return true;
-					break;
 				case 4:
 					//GET GOLD
 					return false;
-					break;
 				case 5:
 					//HEAL
 					return false;
-					break;
 				case 7:
 					return true;
-					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
 					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
@@ -239,10 +212,8 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-					break;
 				default:
-					console.log("ERROR: Collision Check");
-					break;
+					console.log("ERROR: Collision Check"); break;
 			}
 		} else {
 			console.log("ERROR: Collision Direction");
@@ -3225,31 +3196,24 @@ var theGame = {
 				case 0:
 					//EMPTY
 					return false;
-					break;
 				case 1:
 					//WALL
 					return true;
-					break;
 				case 3:
 					//ANOTHER ENEMY
 					return true;
-					break;
 				case 4:
 					//GOLD
 					return true;
-					break;
 				case 5:
 					//POTION
 					return true;
-					break;
 				case 7:
 					//DOWNSTAIRS
 					return true;
-					break;
 				case 8:
 					//DOWNSTAIRS
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 2 ) { //Right
@@ -3257,31 +3221,24 @@ var theGame = {
 				case 0:
 					//EMPTY
 					return false;
-					break;
 				case 1:
 					//WALL
 					return true;
-					break;
 				case 3:
 					//ANOTHER ENEMY
 					return true;
-					break;
 				case 4:
 					//GOLD
 					return true;
-					break;
 				case 5:
 					//POTION
 					return true;
-					break;
 				case 7:
 					//UPSTAIRS
 					return true;
-					break;
 				case 8:
 					//DOWNSTAIRS
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 3 ) { //Up
@@ -3289,31 +3246,24 @@ var theGame = {
 				case 0:
 					//EMPTY
 					return false;
-					break;
 				case 1:
 					//WALL
 					return true;
-					break;
 				case 3:
 					//ANOTHER ENEMY
 					return true;
-					break;
 				case 4:
 					//GOLD
 					return true;
-					break;
 				case 5:
 					//POTION
 					return true;
-					break;
 				case 7:
 					//UPSTAIRS
 					return true;
-					break;
 				case 8:
 					//DOWNSTAIRS
 					return true;
-					break;
 				default: console.log("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 4 ) { //Down			
@@ -3321,34 +3271,26 @@ var theGame = {
 				case 0:
 					//EMPTY
 					return false;
-					break;
 				case 1:
 					//WALL
 					return true;
-					break;
 				case 3:
 					//ANOTHER ENEMY
 					return true;
-					break;
 				case 4:
 					//GOLD
 					return true;
-					break;
 				case 5:
 					//POTION
 					return true;
-					break;
 				case 7:
 					//UPSTAIRS
 					return true;
-					break;
 				case 8:
 					//DOWNSTAIRS
 					return true;
-					break;
 				default:
-					console.log("ERROR: Collision Check");
-					break;
+					console.log("ERROR: Collision Check"); break;
 			}
 		} else {
 			console.log("ERROR: Collision Direction");
