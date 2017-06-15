@@ -1,0 +1,22 @@
+{
+  "name": "dungeondelverrodney",
+  "version": "0.1.0",
+  "description": "A simple JavaScript roguelike",
+  "main": "dungeondelver.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crkellen/dungeondelver.git"
+  },
+  "author": "Lutz Kellen, Marko Vehmas",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/crkellen/dungeondelver/issues"
+  },
+  "homepage": "https://github.com/crkellen/dungeondelver#readme",
+  "devDependencies": {
+    "eslint": "^4.0.0"
+  }
+}
