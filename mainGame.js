@@ -6,6 +6,18 @@
  * Dungeon Delver Rodney Main Program Code
  */
 
+/* TILE NUMBERS
+0 = empty
+1 = wall
+2 = player
+3 = monster (normal)
+4 = gold
+5 = potion
+6 = prize (UNUSED - not created in map generation)
+7 = stairs up (UNUSED not created in map generation)
+8 = stairs down
+*/
+
 var CANVAS_GAME_ID    = "canvasID";
 var WORLD_WIDTH 	  = 960;
 var WORLD_HEIGHT	  = 640;
@@ -20,16 +32,19 @@ var map3 = [];
 var map4 = [];
 var map5 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]; //a row of walls for the last line so the bottom of the map won't be left open/empty
 var cMap = [];
+var enemyLocationsArray = [];
 //In order: Empty, Wall, Player, Enemy, Gold, Potion, Prize, -Upstairs-, Downstairs, Doorway
 //Image File Names
 PLAYER_IMG_SRC  	= 'playerImg.png';
 WALL_IMG_SRC 		= 'wall2Img.png';
 ENEMY_IMG_SRC 	 	= 'enemyImg.png';
 POTION_IMG_SRC 	 	= 'healthPotionImg.png';
-GOLD_IMG_SRC 		= 'goldImg.png'; 		//exists because of Marko
-PRIZE_IMG_SRC 	 	= 'prizeImg.png';  		//exists because of Marko
+GOLD_IMG_SRC 		= 'goldImg.png'; 		//currently unused
+PRIZE_IMG_SRC 	 	= 'prizeImg.png';  		//currently unused
 //UPSTAIRS_IMG_SRC 	= 'upStairsImg.png';
 DOWNSTAIRS_IMG_SRC 	= 'downStairsImg.png';
+HEALTHBAR_IMG_SRC	= 'statHealth.png';
+
 
 /*
 Instead of drawing the images, draw squares of same size. All different colors.
@@ -57,7 +72,9 @@ var Player = {
 	img:	PLAYER_IMG_SRC,
 	pos:	0,
 	health:	100,
+	maxHealth: 100,
 	
+	//Player movement
 	movePlayer: function(dir) {
 		switch(dir) {
 			case "left":
@@ -83,6 +100,7 @@ var Player = {
 		}
 	},
 	
+	//Collision detection
 	collisionCheck : function(dir) {
 		if( dir === "left" ) {
 			switch( cMap[this.pos - 1] ) {
@@ -94,7 +112,7 @@ var Player = {
 					break;
 				case 3:
 					//ATTACK
-					cMap[this.pos - 1] = 0;
+					theGame.KillEnemy(this.pos - 1);
 					return true;
 					break;
 				case 4:
@@ -110,11 +128,12 @@ var Player = {
 					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
+					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
 					cMap[119] = 1;
-					return false;
+					return true;
 					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
@@ -128,7 +147,7 @@ var Player = {
 					break;
 				case 3:
 					//ATTACK
-					cMap[this.pos + 1] = 0;
+					theGame.KillEnemy(this.pos + 1);
 					return true;
 					break;
 				case 4:
@@ -144,11 +163,12 @@ var Player = {
 					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
+					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
 					cMap[119] = 1;
-					return false;
+					return true;
 					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
@@ -162,7 +182,7 @@ var Player = {
 					break;
 				case 3:
 					//ATTACK
-					cMap[this.pos - 30] = 0;
+					theGame.KillEnemy(this.pos - 30);
 					return true;
 					break;
 				case 4:
@@ -178,11 +198,12 @@ var Player = {
 					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
+					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
 					cMap[119] = 1;
-					return false;
+					return true;
 					break;
 				default: console.log("ERROR: Collision Check"); break;
 			}
@@ -196,7 +217,7 @@ var Player = {
 					break;
 				case 3:
 					//ATTACK
-					cMap[this.pos + 30] = 0;
+					theGame.KillEnemy(this.pos + 30);
 					return true;
 					break;
 				case 4:
@@ -212,11 +233,12 @@ var Player = {
 					break;
 				case 8:
 					//GO DOWNSTAIRS (REGEN ROOM)
+					enemyLocationsArray = []; //Empty the enemy locations array so unkilled enemies from last floor don't appear in the next floor.
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
 					cMap[119] = 1;
-					return false;
+					return true;
 					break;
 				default:
 					console.log("ERROR: Collision Check");
@@ -227,9 +249,7 @@ var Player = {
 		}
 		return true;
 	},
-	
-	
-	
+
 	//NEEDS ATTACK FUNCTION
 }
 
@@ -256,6 +276,7 @@ var theGame = {
 	prizeImgLoaded: 		0,
 	//upstairsImgLoaded: 	0,
 	downstairsImgLoaded: 	0,
+	healthbarImgLoaded:		0,
 	//playerInstance:		new Player("player", PLAYER_IMG_SRC, 0, 1, 100);
 	score:  				0,
 	
@@ -298,6 +319,10 @@ var theGame = {
 		this.downstairsImg = new Image();
 		this.downstairsImg.onload = function () { 	theGame.downstairsImgLoaded = 1; };
         this.downstairsImg.src = DOWNSTAIRS_IMG_SRC;
+		//Healthbar
+		this.healthbarImg = new Image();
+		this.healthbarImg.onload = function () {	theGame.healthbarImgLoaded = 1; };
+		this.healthbarImg.src = HEALTHBAR_IMG_SRC;
 		
 		theGame.GenerateMap();
 		theGame.GenerateActors();
@@ -309,6 +334,7 @@ var theGame = {
 		this.isInitialized = 1;
 	},
 	
+	//Generate each room to each floor
 	GenerateMap : function() {
 		theGame.GenerateRooms();
 		
@@ -350,6 +376,7 @@ var theGame = {
 		var MapIndexY = 0;
 		var pivotRoomMade = 0;
 		
+		//Generate the room layouts
 		while(roomNum < 16) {
 			switch( roomNum ) {
 				case 0: //#####################BEGIN MAP 1
@@ -2895,6 +2922,7 @@ var theGame = {
 		}
 	},
 	
+	//Builds the floors according to given numbers
 	GenerateRooms : function() {
 		var pivotMade = 0;
 		var j = 0;
@@ -2998,6 +3026,7 @@ var theGame = {
 					if( map1[randNum] === 0 ) {
 						//PLACE ENEMY
 						map1[randNum] = 3;
+						enemyLocationsArray.push(randNum); // Add the enemy location to the array that tracks enemy locations
 						placedEnemies++;
 					}
 					break;
@@ -3005,6 +3034,7 @@ var theGame = {
 					if( map2[randNum] === 0 ) {
 						//PLACE ENEMY
 						map2[randNum] = 3;
+						enemyLocationsArray.push(randNum + 120); // Add the enemy location to the array that tracks enemy locations
 						placedEnemies++;
 					}
 					break;
@@ -3012,6 +3042,7 @@ var theGame = {
 					if( map3[randNum] === 0 ) {
 						//PLACE ENEMY
 						map3[randNum] = 3;
+						enemyLocationsArray.push(randNum + 240); // Add the enemy location to the array that tracks enemy locations
 						placedEnemies++;
 					}
 					break;
@@ -3019,6 +3050,7 @@ var theGame = {
 					if( map4[randNum] === 0 ) {
 						//PLACE ENEMY
 						map4[randNum] = 3;
+						enemyLocationsArray.push(randNum + 360); // Add the enemy location to the array that tracks enemy locations
 						placedEnemies++;
 					}
 					break;
@@ -3101,7 +3133,7 @@ var theGame = {
 		}
 	},
 	
-	//FIX THE MATH - (It's done. -Dorover)
+	//COMBINE THE 4 ROOM "ROWS" TO MAKE ONE WHOLE MAP
 	CombineMaps : function() {
 		for( var i = 0; i < 510; i++ ) {
 			if( i <= 119 ) {
@@ -3118,6 +3150,210 @@ var theGame = {
 				console.log("ERROR: Combine Maps");
 			}
 		}
+	},
+	
+	KillEnemy : function(enemyLocation) {
+		//Iterate through the array until you find the right enemy location, then remove that enemy and turn the location square to 0 (empty square)
+		var enemyLocationIndexInArray = enemyLocationsArray.indexOf(enemyLocation);
+		if (enemyLocationIndexInArray > -1) {
+			enemyLocationsArray.splice(enemyLocationIndexInArray, 1);
+			cMap[enemyLocation] = 0;
+		} else {
+			console.log("ERROR: KillEnemy()");
+		}
+	},
+	
+	MoveEnemies : function() {
+		console.log("Move enemies...");
+		//When the player has moved and possibly killed an enemy, move the enemies
+		//Iterate through the enemyLocationsArray[] so every enemy gets a chance to move
+		for (i = 0; i < enemyLocationsArray.length; i++) {
+			//Generate a random number which will be translated to a direction (1, 2, 3, 4 = left, right, up, down)
+			var intendedDirection = (Math.floor(Math.random() * 4) + 1);
+			//Check for collisions
+			var willEnemyCollide = this.CollisionCheckEnemies(enemyLocationsArray[i], intendedDirection);
+			//If we can move, move. If we can't move, do nothing.
+			if (willEnemyCollide === false) {
+				//Move
+				switch (intendedDirection) {
+					case 1:
+						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-1));
+						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						cMap[(enemyLocationsArray[i] - 1)] = 3; //Draw enemy in new position
+						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
+						enemyLocationsArray[i] = enemyLocationsArray[i] - 1; //Update enemyLocationsArray[]
+						break;
+					case 2:
+						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+1));
+						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						cMap[(enemyLocationsArray[i] + 1)] = 3; //Draw enemy in new position
+						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
+						enemyLocationsArray[i] = enemyLocationsArray[i] + 1; //Update enemyLocationsArray[]
+						break;
+					case 3:
+						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-30));
+						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						cMap[(enemyLocationsArray[i] - 30)] = 3; //Draw enemy in new position
+						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
+						enemyLocationsArray[i] = enemyLocationsArray[i] - 30; //Update enemyLocationsArray[]
+						break;
+					case 4:
+						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+30));
+						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						cMap[(enemyLocationsArray[i] + 30)] = 3; //Draw enemy in new position
+						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
+						enemyLocationsArray[i] = enemyLocationsArray[i] + 30; //Update enemyLocationsArray[]
+						break;
+					default:
+						console.log("ERROR: MoveEnemies()");
+				}
+				//cMap[enemyLocationsArray[i]] = 0;
+			} else if (willEnemyCollide === true) {
+				//Don't move
+			} else {
+				console.log("ERROR: MoveEnemies()");
+			}
+		}
+		console.log("cMap : " + cMap);
+	},
+	
+	//Collision detection for enemies
+	CollisionCheckEnemies : function (enemyLocation, intendedDirection) {
+		//Generate a random direction (up, down, left, right)
+		if( intendedDirection === 1 ) { //Left
+			switch( cMap[enemyLocation - 1] ) {
+				case 0:
+					//EMPTY
+					return false;
+					break;
+				case 1:
+					//WALL
+					return true;
+					break;
+				case 3:
+					//ANOTHER ENEMY
+					return true;
+					break;
+				case 4:
+					//GOLD
+					return true;
+					break;
+				case 5:
+					//POTION
+					return true;
+					break;
+				case 7:
+					//DOWNSTAIRS
+					return true;
+					break;
+				case 8:
+					//DOWNSTAIRS
+					return true;
+					break;
+				default: console.log("ERROR: Collision Check Enemy"); break;
+			}
+		} else if( intendedDirection === 2 ) { //Right
+			switch( cMap[enemyLocation + 1] ) {
+				case 0:
+					//EMPTY
+					return false;
+					break;
+				case 1:
+					//WALL
+					return true;
+					break;
+				case 3:
+					//ANOTHER ENEMY
+					return true;
+					break;
+				case 4:
+					//GOLD
+					return true;
+					break;
+				case 5:
+					//POTION
+					return true;
+					break;
+				case 7:
+					//UPSTAIRS
+					return true;
+					break;
+				case 8:
+					//DOWNSTAIRS
+					return true;
+					break;
+				default: console.log("ERROR: Collision Check Enemy"); break;
+			}
+		} else if( intendedDirection === 3 ) { //Up
+			switch( cMap[enemyLocation - 30] ) {
+				case 0:
+					//EMPTY
+					return false;
+					break;
+				case 1:
+					//WALL
+					return true;
+					break;
+				case 3:
+					//ANOTHER ENEMY
+					return true;
+					break;
+				case 4:
+					//GOLD
+					return true;
+					break;
+				case 5:
+					//POTION
+					return true;
+					break;
+				case 7:
+					//UPSTAIRS
+					return true;
+					break;
+				case 8:
+					//DOWNSTAIRS
+					return true;
+					break;
+				default: console.log("ERROR: Collision Check Enemy"); break;
+			}
+		} else if( intendedDirection === 4 ) { //Down			
+			switch( cMap[enemyLocation + 30] ) {
+				case 0:
+					//EMPTY
+					return false;
+					break;
+				case 1:
+					//WALL
+					return true;
+					break;
+				case 3:
+					//ANOTHER ENEMY
+					return true;
+					break;
+				case 4:
+					//GOLD
+					return true;
+					break;
+				case 5:
+					//POTION
+					return true;
+					break;
+				case 7:
+					//UPSTAIRS
+					return true;
+					break;
+				case 8:
+					//DOWNSTAIRS
+					return true;
+					break;
+				default:
+					console.log("ERROR: Collision Check");
+					break;
+			}
+		} else {
+			console.log("ERROR: Collision Direction");
+		}
+		return true;
 	},
 	
 	//#TODO: Finish
@@ -3162,10 +3398,10 @@ var theGame = {
 	
 	DrawScreen : function(ctx) {
 		//Clear the Screen
-		ctx.fillStyle = "#333333";
+		ctx.fillStyle = "#303030"; //The background colour
         ctx.fillRect(0, 0, this.gameWidth, this.gameHeight);
 		//Print the map[]
-		for( var i = 0; i < 120; i++ ) {
+		for( var i = 0; i < 120; i++ ) { //Draws the 1st row of rooms
 			theGame.CalculateCoords(i, 0);
 			switch( cMap[i] ) {
 				case 0:
@@ -3243,7 +3479,7 @@ var theGame = {
 			}
 		}
 		theGame.onesPlace = 0;
-		for( var i = 120; i < 240; i++ ) {
+		for( var i = 120; i < 240; i++ ) { //Draws the 2nd row of rooms
 			theGame.CalculateCoords(i-120, 1);
 			switch( cMap[i] ) {
 				case 0:
@@ -3319,7 +3555,7 @@ var theGame = {
 			}
 		}
 		theGame.onesPlace = 0;
-		for( var i = 240; i < 360; i++ ) {
+		for( var i = 240; i < 360; i++ ) { //Draws the 3rd row of rooms
 			theGame.CalculateCoords(i-240, 2);
 			switch( cMap[i] ) {
 				case 0:
@@ -3395,7 +3631,7 @@ var theGame = {
 			}
 		}
 		theGame.onesPlace = 0;
-		for( var i = 360; i <= 509; i++ ) {
+		for( var i = 360; i <= 509; i++ ) { //Draws the 4th row of rooms
 			theGame.CalculateCoords(i-360, 3);
 			switch( cMap[i] ) {
 				case 0:
@@ -3471,7 +3707,47 @@ var theGame = {
 			}
 		}
 		theGame.onesPlace = 0;
-		
+		/*
+		//Just for testing how the drawing works, it's commented so the game looks normal. -Dorover
+		theGame.CalculateCoords(480-360, 3);
+		ctx.drawImage(this.prizeImg, 0, 0, this.prizeImg.width, this.prizeImg.height, 30, 600, this.prizeImg.width, this.prizeImg.height);
+		theGame.onesPlace = 0;
+		*/
+		//Draw the stats (health, score)
+		if(this.healthbarImgLoaded != 0) {
+			ctx.drawImage(this.healthbarImg, 0, 0, this.healthbarImg.width, this.healthbarImg.height, 20, 570, this.healthbarImg.width, this.healthbarImg.height);
+		}
+		//Health
+		ctx.beginPath();
+		ctx.rect(98, 582, (133 * (Player.health/Player.maxHealth)), 21);
+		ctx.fillStyle = "Green";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.rect(97, 581, 135, 23);
+		ctx.stroke();
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "Green";
+		ctx.textAlign = "left";
+		ctx.fillText("Health", 30, 600);
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "White";
+		ctx.textAlign = "left";
+		ctx.fillText(Player.health, 125, 600);
+		ctx.fillText("/", 165, 600)
+		ctx.fillText(Player.maxHealth, 175, 600);
+		//Score
+		if(this.healthbarImgLoaded != 0) {
+			ctx.drawImage(this.healthbarImg, 0, 0, this.healthbarImg.width, this.healthbarImg.height, 713, 570, this.healthbarImg.width, this.healthbarImg.height);
+		}
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "Yellow";
+		ctx.textAlign = "left";
+		ctx.fillText("Score", 723, 600);
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "White";
+		ctx.textAlign = "left";
+		ctx.fillText(this.score, 818, 600);
+
 	},
 
 	ProcessInput : function(event) {
@@ -3479,25 +3755,29 @@ var theGame = {
 			//Left
             case 37:
 				if( !Player.collisionCheck("left") ) {
-					Player.movePlayer("left");	
+					Player.movePlayer("left");
+					theGame.MoveEnemies();
 				}
 				break;
             //Right
             case 39:
 				if( !Player.collisionCheck("right") ) {
-					Player.movePlayer("right");	
+					Player.movePlayer("right");
+					theGame.MoveEnemies();
 				}
 				break;
             //Up
             case 38:
 				if( !Player.collisionCheck("up") ) {
-					Player.movePlayer("up");	
+					Player.movePlayer("up");
+					theGame.MoveEnemies();
 				}
 				break;
             //Down
             case 40:
 				if( !Player.collisionCheck("down") ) {
-					Player.movePlayer("down");	
+					Player.movePlayer("down");
+					theGame.MoveEnemies();
 				}
 				break;
 			default:
@@ -3510,7 +3790,7 @@ var theGame = {
 		if ( theGame.gameState == theGame.STATE_PLAYING ) {
             return;
 		} else if( theGame.gameState == theGame.STATE_PROCESS_TURN ) {
-            theGame.ProcessTurn();
+			theGame.ProcessTurn();
 		} else if( theGame.gameState == theGame.STATE_GAMEOVER ) {
 			return; //MAY NOT BE A GOOD IDEA.
         } else {
@@ -3526,6 +3806,7 @@ window.addEventListener("keydown", doKeydown, false);
 
 function doKeydown(e) {
 	theGame.ProcessInput(e);
+	console.log("Enemy locations are: " + enemyLocationsArray);
 }
 
 window.onload = function() {	
