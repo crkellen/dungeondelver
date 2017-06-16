@@ -127,7 +127,7 @@ var Player = {
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
-					cMap[119] = 1;
+					//cMap[119] = 1;
 					return true;
 				default: console.info("ERROR: Collision Check"); break;
 			}
@@ -155,7 +155,7 @@ var Player = {
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
-					cMap[119] = 1;
+					//cMap[119] = 1;
 					return true;
 				default: console.info("ERROR: Collision Check"); break;
 			}
@@ -183,7 +183,7 @@ var Player = {
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
-					cMap[119] = 1;
+					//cMap[119] = 1;
 					return true;
 				default: console.info("ERROR: Collision Check"); break;
 			}
@@ -211,7 +211,7 @@ var Player = {
 					theGame.GenerateMap();
 					theGame.GenerateActors();
 					theGame.CombineMaps();
-					cMap[119] = 1;
+					//cMap[119] = 1;
 					return true;
 				default:
 					console.info("ERROR: Collision Check");
@@ -300,7 +300,7 @@ var theGame = {
 		theGame.GenerateMap();
 		theGame.GenerateActors();
 		theGame.CombineMaps();
-		cMap[119] = 1;
+		//cMap[119] = 1;
 		
 		gameCanvas.style.display = 'inline';
 		
