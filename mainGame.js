@@ -129,7 +129,7 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-				default: console.log("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "right" ) {
 			switch( cMap[this.pos + 1] ) {
@@ -157,7 +157,7 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-				default: console.log("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "up" ) {
 			switch( cMap[this.pos - 30] ) {
@@ -185,7 +185,7 @@ var Player = {
 					theGame.CombineMaps();
 					cMap[119] = 1;
 					return true;
-				default: console.log("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check"); break;
 			}
 		} else if( dir === "down" ) {			
 			switch( cMap[this.pos + 30] ) {
@@ -214,11 +214,11 @@ var Player = {
 					cMap[119] = 1;
 					return true;
 				default:
-					console.log("ERROR: Collision Check");
+					console.info("ERROR: Collision Check");
 					break;
 			}
 		} else {
-			console.log("ERROR: Collision Direction");
+			console.info("ERROR: Collision Direction");
 		}
 		return true;
 	},
@@ -342,7 +342,7 @@ var theGame = {
 			map4[z] = 0;
 		}
 		
-		//console.log("Map at Index #" + ((mapIndexY*30)+mapIndexX) + " is " + map4[(mapIndexY*30)+mapIndexX]);
+		//console.info("Map at Index #" + ((mapIndexY*30)+mapIndexX) + " is " + map4[(mapIndexY*30)+mapIndexX]);
 		var roomNum = 0;
 		var previousRoom = 0;
 		var mapIndexX = 0;
@@ -423,9 +423,9 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 1"); break;
+								default: console.info("ERROR: Room 1"); break;
 							}
-							//console.log(mapIndexX);
+							//console.info(mapIndexX);
 						}
 					}
 					//NORMAL ROOM
@@ -490,9 +490,9 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 1"); break;
+								default: console.info("ERROR: Room 1"); break;
 							}
-							//console.log(mapIndexX);
+							//console.info(mapIndexX);
 						}
 					}
 					break;
@@ -565,9 +565,9 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 2"); break;
+								default: console.info("ERROR: Room 2"); break;
 							}
-							//console.log(mapIndexX);
+							//console.info(mapIndexX);
 						}
 					}
 					//NORMAL ROOM
@@ -650,7 +650,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 2"); break;
+								default: console.info("ERROR: Room 2"); break;
 							}
 						}
 					}
@@ -724,7 +724,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 2"); break;
+								default: console.info("ERROR: Room 2"); break;
 							}
 						}
 					}
@@ -808,7 +808,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 2"); break;
+								default: console.info("ERROR: Room 2"); break;
 							}
 						}
 					}
@@ -884,7 +884,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 3"); break;
+								default: console.info("ERROR: Room 3"); break;
 							}
 						}
 					}
@@ -970,7 +970,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 3"); break;
+								default: console.info("ERROR: Room 3"); break;
 							}
 						}
 					}
@@ -1053,7 +1053,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 4"); break;
+								default: console.info("ERROR: Room 4"); break;
 							}
 						}						
 					}
@@ -1119,7 +1119,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 4"); break;
+								default: console.info("ERROR: Room 4"); break;
 							}
 						}
 					}
@@ -1199,7 +1199,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 5"); break;
+								default: console.info("ERROR: Room 5"); break;
 							}
 						}
 					}
@@ -1283,7 +1283,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 5"); break;
+								default: console.info("ERROR: Room 5"); break;
 							}
 						}
 					}
@@ -1363,7 +1363,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 6"); break;
+								default: console.info("ERROR: Room 6"); break;
 							}
 						}
 					}
@@ -1447,7 +1447,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 6"); break;
+								default: console.info("ERROR: Room 6"); break;
 							}
 						}
 					}
@@ -1529,7 +1529,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 7"); break;
+								default: console.info("ERROR: Room 7"); break;
 							}
 						}
 					}
@@ -1615,7 +1615,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 7"); break;
+								default: console.info("ERROR: Room 7"); break;
 							}
 						}
 					}
@@ -1698,7 +1698,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 8"); break;
+								default: console.info("ERROR: Room 8"); break;
 							}
 						}
 					}
@@ -1764,7 +1764,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 8"); break;
+								default: console.info("ERROR: Room 8"); break;
 							}
 						}
 					}
@@ -1844,7 +1844,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 9"); break;
+								default: console.info("ERROR: Room 9"); break;
 							}
 						}
 					}
@@ -1928,7 +1928,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 9"); break;
+								default: console.info("ERROR: Room 9"); break;
 							}
 						}
 					}
@@ -2008,7 +2008,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 10"); break;
+								default: console.info("ERROR: Room 10"); break;
 							}
 						}
 					}
@@ -2092,7 +2092,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 10"); break;
+								default: console.info("ERROR: Room 10"); break;
 							}
 						}
 					}
@@ -2174,7 +2174,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 11"); break;
+								default: console.info("ERROR: Room 11"); break;
 							}
 						}
 					}
@@ -2260,7 +2260,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 11"); break;
+								default: console.info("ERROR: Room 11"); break;
 							}
 						}
 					}
@@ -2337,7 +2337,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 12"); break;
+								default: console.info("ERROR: Room 12"); break;
 							}
 						}
 					}
@@ -2403,7 +2403,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 12"); break;
+								default: console.info("ERROR: Room 12"); break;
 							}
 						}
 					}
@@ -2477,7 +2477,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 13"); break;
+								default: console.info("ERROR: Room 13"); break;
 							}
 						}
 					}
@@ -2561,7 +2561,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 13"); break;
+								default: console.info("ERROR: Room 13"); break;
 							}
 						}
 					}
@@ -2635,7 +2635,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 14"); break;
+								default: console.info("ERROR: Room 14"); break;
 							}
 						}
 					}
@@ -2719,7 +2719,7 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 14"); break;
+								default: console.info("ERROR: Room 14"); break;
 							}
 						}
 					}
@@ -2795,9 +2795,9 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 15"); break;
+								default: console.info("ERROR: Room 15"); break;
 							}
-							//console.log(mapIndexX);
+							//console.info(mapIndexX);
 						}
 					}
 					//NORMAL ROOM
@@ -2882,13 +2882,13 @@ var theGame = {
 										mapIndexX++;
 									}
 									break;
-								default: console.log("ERROR: Room 15"); break;
+								default: console.info("ERROR: Room 15"); break;
 							}
 						}
 					}
 					break;
 				default:
-					console.log("ERROR: Map Generation (Rooms)");
+					console.info("ERROR: Map Generation (Rooms)");
 					break;
 			}
 			roomNum++;
@@ -2970,7 +2970,7 @@ var theGame = {
 					}
 					
 					break;
-				default: console.log("ERROR: Map Stairs"); break;
+				default: console.info("ERROR: Map Stairs"); break;
 			}
 			if( placedUpstairs === 1 && placedDownstairs === 1 ) {
 				placedStairs = 1;
@@ -3027,7 +3027,7 @@ var theGame = {
 						placedEnemies++;
 					}
 					break;
-				default: console.log("ERROR: Map Enemies"); break;
+				default: console.info("ERROR: Map Enemies"); break;
 			}
 		}
 		//Generate Gold
@@ -3064,7 +3064,7 @@ var theGame = {
 						placedGold++;
 					}
 					break;
-				default: console.log("ERROR: Map Gold"); break;
+				default: console.info("ERROR: Map Gold"); break;
 			}
 		}
 		//Generate Potions
@@ -3101,7 +3101,7 @@ var theGame = {
 						placedPotions++;
 					}
 					break;
-				default: console.log("ERROR: Map Potion"); break;
+				default: console.info("ERROR: Map Potion"); break;
 			}
 		}
 	},
@@ -3120,7 +3120,7 @@ var theGame = {
 			} else if(i == 480 || i == 510 || ((i > 480) && (i < 510))) {
 				cMap[i] = map5[i-480];
 			} else {
-				console.log("ERROR: Combine Maps");
+				console.info("ERROR: Combine Maps");
 			}
 		}
 	},
@@ -3132,12 +3132,12 @@ var theGame = {
 			enemyLocationsArray.splice(enemyLocationIndexInArray, 1);
 			cMap[enemyLocation] = 0;
 		} else {
-			console.log("ERROR: KillEnemy()");
+			console.info("ERROR: KillEnemy()");
 		}
 	},
 	
 	MoveEnemies : function() {
-		console.log("Move enemies...");
+		console.info("Move enemies...");
 		//When the player has moved and possibly killed an enemy, move the enemies
 		//Iterate through the enemyLocationsArray[] so every enemy gets a chance to move
 		for (i = 0; i < enemyLocationsArray.length; i++) {
@@ -3150,44 +3150,44 @@ var theGame = {
 				//Move
 				switch (intendedDirection) {
 					case 1:
-						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-1));
-						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-1));
+						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] - 1)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] - 1; //Update enemyLocationsArray[]
 						break;
 					case 2:
-						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+1));
-						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+1));
+						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] + 1)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] + 1; //Update enemyLocationsArray[]
 						break;
 					case 3:
-						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-30));
-						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-30));
+						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] - 30)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] - 30; //Update enemyLocationsArray[]
 						break;
 					case 4:
-						console.log("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+30));
-						console.log("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+30));
+						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] + 30)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] + 30; //Update enemyLocationsArray[]
 						break;
 					default:
-						console.log("ERROR: MoveEnemies()");
+						console.info("ERROR: MoveEnemies()");
 				}
 				//cMap[enemyLocationsArray[i]] = 0;
 			} else if (willEnemyCollide === true) {
 				//Don't move
 			} else {
-				console.log("ERROR: MoveEnemies()");
+				console.info("ERROR: MoveEnemies()");
 			}
 		}
-		console.log("cMap : " + cMap);
+		console.info("cMap : " + cMap);
 	},
 	
 	//Collision detection for enemies
@@ -3216,7 +3216,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.log("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 2 ) { //Right
 			switch( cMap[enemyLocation + 1] ) {
@@ -3241,7 +3241,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.log("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 3 ) { //Up
 			switch( cMap[enemyLocation - 30] ) {
@@ -3266,7 +3266,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.log("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy"); break;
 			}
 		} else if( intendedDirection === 4 ) { //Down			
 			switch( cMap[enemyLocation + 30] ) {
@@ -3292,11 +3292,11 @@ var theGame = {
 					//DOWNSTAIRS
 					return true;
 				default:
-					console.log("ERROR: Collision Check");
+					console.info("ERROR: Collision Check");
 					break;
 			}
 		} else {
-			console.log("ERROR: Collision Direction");
+			console.info("ERROR: Collision Direction");
 		}
 		return true;
 	},
@@ -3419,7 +3419,7 @@ var theGame = {
 					}
 					break;
 				default:
-					//console.log("ERROR: Map Drawing"); 
+					//console.info("ERROR: Map Drawing"); 
 					break;
 			}
 		}
@@ -3495,7 +3495,7 @@ var theGame = {
 					}
 					break;
 				default:
-					console.log("ERROR: Map Drawing");
+					console.info("ERROR: Map Drawing");
 					break;
 			}
 		}
@@ -3571,7 +3571,7 @@ var theGame = {
 					}
 					break;
 				default:
-					console.log("ERROR: Map Drawing");
+					console.info("ERROR: Map Drawing");
 					break;
 			}
 		}
@@ -3647,7 +3647,7 @@ var theGame = {
 					}
 					break;
 				default:
-					console.log("ERROR: Map Drawing. When i = " + i);
+					console.info("ERROR: Map Drawing. When i = " + i);
 					break;
 			}
 		}
@@ -3740,7 +3740,7 @@ var theGame = {
 			return; //MAY NOT BE A GOOD IDEA.
         } else {
 			//ERROR
-			console.log("ERROR: Update State");
+			console.info("ERROR: Update State");
 		}
 	},
 };
@@ -3751,7 +3751,7 @@ window.addEventListener("keydown", doKeydown, false);
 
 function doKeydown(e) {
 	theGame.ProcessInput(e);
-	console.log("Enemy locations are: " + enemyLocationsArray);
+	console.info("Enemy locations are: " + enemyLocationsArray);
 }
 
 window.onload = function() {	
