@@ -3419,7 +3419,7 @@ var theGame = {
 					}
 					break;
 				default:
-					//console.info("ERROR: Map Drawing"); 
+					console.info("ERROR: Map Drawing"); 
 					break;
 			}
 		}
