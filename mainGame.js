@@ -35,15 +35,16 @@ var cMap = [];
 var enemyLocationsArray = [];
 //In order: Empty, Wall, Player, Enemy, Gold, Potion, Prize, -Upstairs-, Downstairs, Doorway
 //Image File Names
-PLAYER_IMG_SRC  	= 'playerImg.png';
-WALL_IMG_SRC 		= 'wall2Img.png';
-ENEMY_IMG_SRC 	 	= 'enemyImg.png';
-POTION_IMG_SRC 	 	= 'healthPotionImg.png';
-GOLD_IMG_SRC 		= 'goldImg.png'; 		//currently unused
-PRIZE_IMG_SRC 	 	= 'prizeImg.png';  		//currently unused
-//UPSTAIRS_IMG_SRC 	= 'upStairsImg.png';
-DOWNSTAIRS_IMG_SRC 	= 'downStairsImg.png';
-HEALTHBAR_IMG_SRC	= 'statHealth.png';
+PLAYER_IMG_SRC  	= 'images/playerImg.png';
+WALL_IMG_SRC 		= 'images/wall2Img.png';
+ENEMY_IMG_SRC 	 	= 'images/enemyImg.png';
+POTION_IMG_SRC 	 	= 'images/healthPotionImg.png';
+GOLD_IMG_SRC 		= 'images/goldImg.png'; 		//currently unused
+PRIZE_IMG_SRC 	 	= 'images/prizeImg.png';  		//currently unused
+//UPSTAIRS_IMG_SRC 	= 'images/upStairsImg.png';
+//CHEST_OPEN_IMG_SRC= 'images/openChestImg.png';
+DOWNSTAIRS_IMG_SRC 	= 'images/downStairsImg.png';
+HEALTHBAR_IMG_SRC	= 'images/statHealth.png';
 
 
 /*
