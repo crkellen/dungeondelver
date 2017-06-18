@@ -3197,7 +3197,7 @@ var theGame = {
 		//If there is, roll an attack chance
 		//If attack goes through, roll the damage amount
 		//Attack (deal damage to player, change the frame of the attacking enemy)
-		console.info("Check if monsters should attack here");
+		//console.info("Check if monsters should attack here");
 	},
 	
 	//Collision detection for enemies
@@ -3312,8 +3312,20 @@ var theGame = {
 	},
 	
 	IsPlayerNearEnemy : function () {
-		console.info("Player position: " + Player.pos);
-		return false;
+		//console.info("Player position: " + Player.pos);
+		var playerSurroundingsArray = [];
+		playerSurroundingsArray.push(Player.pos - 30); //Above the player
+		playerSurroundingsArray.push(Player.pos - 1); //Left of the player
+		playerSurroundingsArray.push(Player.pos + 1); //Right of the player
+		playerSurroundingsArray.push(Player.pos + 30); //Under the player
+		for (var i = 0; i < enemyLocationsArray.length; i++) {
+			for (var j = 0; j < playerSurroundingsArray.length; j++) {
+				if (enemyLocationsArray[i] === playerSurroundingsArray[j]) {
+					return true; //Player is near an enemy
+				}
+			}
+		}
+		return false; //Checked everything, player isn't near an enemy
 	},
 
 	//#TODO: Finish
