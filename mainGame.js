@@ -3331,7 +3331,7 @@ var theGame = {
 		if (attackChance <= 75) {
 			console.info("Enemy attacks the player");
 			//Damage is 5 for now
-			Player.health =- 5;
+			Player.health -= 5;
 			theGame.AnimateActor("enemy", "attack", enemyPosition);
 			//TODO: add an algorithm that increases the enemy damage as the player gets deeper in the dungeon
 		}
