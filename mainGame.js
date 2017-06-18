@@ -3221,7 +3221,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.info("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy, this enemy location: " + enemyLocation); break;
 			}
 		} else if( intendedDirection === 2 ) { //Right
 			switch( cMap[enemyLocation + 1] ) {
@@ -3246,7 +3246,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.info("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy, this enemy location: " + enemyLocation); break;
 			}
 		} else if( intendedDirection === 3 ) { //Up
 			switch( cMap[enemyLocation - 30] ) {
@@ -3271,7 +3271,7 @@ var theGame = {
 				case 8:
 					//DOWNSTAIRS
 					return true;
-				default: console.info("ERROR: Collision Check Enemy"); break;
+				default: console.info("ERROR: Collision Check Enemy, this enemy location: " + enemyLocation); break;
 			}
 		} else if( intendedDirection === 4 ) { //Down			
 			switch( cMap[enemyLocation + 30] ) {
@@ -3297,7 +3297,7 @@ var theGame = {
 					//DOWNSTAIRS
 					return true;
 				default:
-					console.info("ERROR: Collision Check Enemy");
+					console.info("ERROR: Collision Check Enemy, this enemy location: " + enemyLocation);
 					break;
 			}
 		} else {
