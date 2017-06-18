@@ -3353,6 +3353,7 @@ var theGame = {
 				break;
 			default:
 				console.info("ERROR: AnimateActor, actorType:" + actorType + ", actorAnimation:" + actorAnimation);
+				break;
 		}
 	},
 
