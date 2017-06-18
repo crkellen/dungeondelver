@@ -3188,6 +3188,16 @@ var theGame = {
 			}
 		}
 		//console.info("cMap : " + cMap);
+		if (theGame.IsPlayerNearEnemy()) {
+			//Player is near an enemy
+			console.info("Player is near an enemy");
+		}
+		//Store player position
+		//Check if there is an enemy up, left, right, down
+		//If there is, roll an attack chance
+		//If attack goes through, roll the damage amount
+		//Attack (deal damage to player, change the frame of the attacking enemy)
+		console.info("Check if monsters should attack here");
 	},
 	
 	//Collision detection for enemies
@@ -3301,6 +3311,11 @@ var theGame = {
 		return true;
 	},
 	
+	IsPlayerNearEnemy : function () {
+		console.info("Player position: " + Player.pos);
+		return false;
+	},
+
 	//#TODO: Finish
 	GameOver : function() {
 		window.alert("YOU DIED!");
