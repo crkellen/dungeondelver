@@ -3137,7 +3137,7 @@ var theGame = {
 	},
 	
 	MoveEnemies : function() {
-		console.info("Move enemies...");
+		//console.info("Move enemies...");
 		//When the player has moved and possibly killed an enemy, move the enemies
 		//Iterate through the enemyLocationsArray[] so every enemy gets a chance to move
 		for (i = 0; i < enemyLocationsArray.length; i++) {
@@ -3150,29 +3150,29 @@ var theGame = {
 				//Move
 				switch (intendedDirection) {
 					case 1:
-						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-1));
-						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						//console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-1));
+						//console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] - 1)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] - 1; //Update enemyLocationsArray[]
 						break;
 					case 2:
-						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+1));
-						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						//console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+1));
+						//console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] + 1)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] + 1; //Update enemyLocationsArray[]
 						break;
 					case 3:
-						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-30));
-						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						//console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]-30));
+						//console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] - 30)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] - 30; //Update enemyLocationsArray[]
 						break;
 					case 4:
-						console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+30));
-						console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
+						//console.info("Moving enemy from " + enemyLocationsArray[i] + " to " + (enemyLocationsArray[i]+30));
+						//console.info("cMap at enemy's location is " + cMap[enemyLocationsArray[i]]);
 						cMap[(enemyLocationsArray[i] + 30)] = 3; //Draw enemy in new position
 						cMap[enemyLocationsArray[i]] = 0; //Remove enemy from old position
 						enemyLocationsArray[i] = enemyLocationsArray[i] + 30; //Update enemyLocationsArray[]
@@ -3187,7 +3187,7 @@ var theGame = {
 				console.info("ERROR: MoveEnemies()");
 			}
 		}
-		console.info("cMap : " + cMap);
+		//console.info("cMap : " + cMap);
 	},
 	
 	//Collision detection for enemies
@@ -3751,7 +3751,7 @@ window.addEventListener("keydown", doKeydown, false);
 
 function doKeydown(e) {
 	theGame.ProcessInput(e);
-	console.info("Enemy locations are: " + enemyLocationsArray);
+	//console.info("Enemy locations are: " + enemyLocationsArray);
 }
 
 window.onload = function() {	
