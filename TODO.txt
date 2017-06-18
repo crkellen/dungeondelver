@@ -15,4 +15,4 @@ Give the enemies some sort of an attack (can this be done with an animation cell
 -----
 
 Bugs:
-Check out what happens if you remove all the "cMap[119] = 1;" lines? Does it break the map generation? (Tile 119 is bottom right corner of top room-line.)
+The game sometimes logs "ERROR: Collision Check Enemy".
