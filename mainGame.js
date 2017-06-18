@@ -3317,8 +3317,16 @@ var theGame = {
 			for (var j = 0; j < playerSurroundingsArray.length; j++) {
 				if (enemyLocationsArray[i] === playerSurroundingsArray[j]) {
 					//The player is near an enemy, it's the enemy's chance to strike
+					theGame.EnemyAttackThePlayer (enemyLocationsArray[i])
 				}
 			}
+		}
+	},
+
+	EnemyAttackThePlayer : function (enemyPosition) {
+		var attackChance = Math.floor((Math.random() * 100) + 1);
+		if (attackChance <= 75) {
+			console.info("Enemy attacks the player");
 		}
 	},
 
