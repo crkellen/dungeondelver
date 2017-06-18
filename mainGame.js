@@ -3327,6 +3327,28 @@ var theGame = {
 		var attackChance = Math.floor((Math.random() * 100) + 1);
 		if (attackChance <= 75) {
 			console.info("Enemy attacks the player");
+			//Damage is 5 for now
+			Player.health =- 5;
+			theGame.AnimateActor("enemy", "attack", enemyPosition);
+			//TODO: add an algorithm that increases the enemy damage as the player gets deeper in the dungeon
+		}
+	},
+
+	AnimateActor : function (actorType, actorAnimation, mapIndexOfActor) {
+		switch (actorType) {
+			case "player":
+				console.info("animate player here");
+				break;
+			case "enemy":
+				console.info("animate enemy");
+				switch (actorAnimation) {
+					case "attack" :
+						console.info("attacking");
+						break;
+				}
+				break;
+			default:
+				console.info("ERROR: AnimateActor, actorType:" + actorType + ", actorAnimation:" + actorAnimation);
 		}
 	},
 
