@@ -3188,13 +3188,8 @@ var theGame = {
 			}
 		}
 		//console.info("cMap : " + cMap);
-		if (theGame.IsPlayerNearEnemy()) {
-			//Player is near an enemy
-			console.info("Player is near an enemy");
-		}
-		//Store player position
-		//Check if there is an enemy up, left, right, down
-		//If there is, roll an attack chance
+		theGame.IsPlayerNearEnemy()
+		//Roll an attack chance
 		//If attack goes through, roll the damage amount
 		//Attack (deal damage to player, change the frame of the attacking enemy)
 		//console.info("Check if monsters should attack here");
@@ -3321,11 +3316,10 @@ var theGame = {
 		for (var i = 0; i < enemyLocationsArray.length; i++) {
 			for (var j = 0; j < playerSurroundingsArray.length; j++) {
 				if (enemyLocationsArray[i] === playerSurroundingsArray[j]) {
-					return true; //Player is near an enemy
+					//The player is near an enemy, it's the enemy's chance to strike
 				}
 			}
 		}
-		return false; //Checked everything, player isn't near an enemy
 	},
 
 	//#TODO: Finish
