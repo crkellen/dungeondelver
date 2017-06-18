@@ -2,8 +2,8 @@ TODO list:
 --Enemies moving
 --Stat bars
 Enemy fighting
-Turn based or real time? (Or maybe implement both? In real time moving/actions could have 0.1 second delay so you can't move-hit-move in a very short time frame)
 HP potions should heal
+Turn based or real time? (Or maybe implement both? In real time moving/actions could have 0.1 second delay so you can't move-hit-move in a very short time frame)
 Coins? (Money for some sort of purchases or just score?) (A sprite already exists)
 Chests? (Need to draw a sprite for a closed chest, open one exists)
 Keys? (For either a chest, or the stairs down. In the first case we could spawn a random amount of keys (like 0 = 50%, 1 = 45%, 2 = 5%), in the latter one key per floor)
@@ -11,8 +11,10 @@ Bosses?
 Different mobs? (If chests are added as well, Mimics could be cool)
 -----
 Next up:
-Give the enemies some sort of an attack (can this be done with an animation cell/image? For example when an enemy attacks, change its image to another one for 0.3 seconds)
+Give the player 0.350-0.5 seconds between every movement so all the animations can finish.
 -----
 
 Bugs:
 The game sometimes logs "ERROR: Collision Check Enemy".
+If the player moves while something is in the middle of an animation, that something leaves a false duplicate image.
+If the player tries to attack an enemy who is in the middle of attacking (attacking frame), the player can't kill that enemy (because he's collisioning with 301, not 3).
