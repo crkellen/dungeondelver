@@ -129,7 +129,7 @@ var Player = {
 					theGame.CombineMaps();
 					//cMap[119] = 1;
 					return true;
-				default: console.info("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check Player Left"); break;
 			}
 		} else if( dir === "right" ) {
 			switch( cMap[this.pos + 1] ) {
@@ -157,7 +157,7 @@ var Player = {
 					theGame.CombineMaps();
 					//cMap[119] = 1;
 					return true;
-				default: console.info("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check Player Right"); break;
 			}
 		} else if( dir === "up" ) {
 			switch( cMap[this.pos - 30] ) {
@@ -185,7 +185,7 @@ var Player = {
 					theGame.CombineMaps();
 					//cMap[119] = 1;
 					return true;
-				default: console.info("ERROR: Collision Check"); break;
+				default: console.info("ERROR: Collision Check Player Up"); break;
 			}
 		} else if( dir === "down" ) {			
 			switch( cMap[this.pos + 30] ) {
@@ -214,7 +214,7 @@ var Player = {
 					//cMap[119] = 1;
 					return true;
 				default:
-					console.info("ERROR: Collision Check");
+					console.info("ERROR: Collision Check Player Down");
 					break;
 			}
 		} else {
@@ -3292,7 +3292,7 @@ var theGame = {
 					//DOWNSTAIRS
 					return true;
 				default:
-					console.info("ERROR: Collision Check");
+					console.info("ERROR: Collision Check Enemy");
 					break;
 			}
 		} else {
