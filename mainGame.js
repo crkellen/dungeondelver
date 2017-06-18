@@ -6,7 +6,7 @@
  * Dungeon Delver Rodney Main Program Code
  */
 
-/* TILE NUMBERS
+/* BASIC TILE NUMBERS
 0 = empty
 1 = wall
 2 = player
@@ -16,6 +16,9 @@
 6 = prize (UNUSED - not created in map generation)
 7 = stairs up (UNUSED not created in map generation)
 8 = stairs down
+DIFFERENT ANIMATION FRAMES FOR DIFFERENT TILES
+(here 1XX is for walls, 2XX is for the player, 3XX is for the normal enemy etc. based on the BASIC TILE NUMBERS)
+301 = monster (normal) attacking
 */
 
 var CANVAS_GAME_ID    = "canvasID";
@@ -3344,12 +3347,20 @@ var theGame = {
 				switch (actorAnimation) {
 					case "attack" :
 						console.info("attacking");
+						theGame.DrawImageToLocation(6, mapIndexOfActor);
 						break;
 				}
 				break;
 			default:
 				console.info("ERROR: AnimateActor, actorType:" + actorType + ", actorAnimation:" + actorAnimation);
 		}
+	},
+
+	DrawImageToLocation : function (imageToDraw, whereToDraw) {
+		var oldImage = cMap[whereToDraw];
+		cMap[whereToDraw] = imageToDraw;
+		setTimeout(function(){ cMap[whereToDraw] = oldImage }, 300);
+
 	},
 
 	//#TODO: Finish
@@ -3394,6 +3405,7 @@ var theGame = {
 	
 	DrawScreen : function(ctx) {
 		//Clear the Screen
+		//console.info("Draw the screen");
 		ctx.fillStyle = "#303030"; //The background colour
         ctx.fillRect(0, 0, this.gameWidth, this.gameHeight);
 		//Print the map[]
